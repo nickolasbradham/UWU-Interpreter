@@ -24,25 +24,45 @@ final class Interpreter {
 		for (byte l = 0; l < lines.length; l++) {
 			String[] split = lines[l].split(" ");
 			switch (split[0]) {
-			case "vrawr":
-				switch (split[1]) {
-				case "stowre":
-					varMap.put(split[2], buildString(split, 3));
-					break;
-				case "owp":
-					//TODO Continue.
-				}
+			case "vwar":
+				varMap.put(split[1], buildString(split, 2));
 				break;
+
 			case "pwint":
 				switch (split[1]) {
 				case "twext":
 					System.out.println(buildString(split, 2));
 					break;
-				case "vrawr":
+
+				case "vwar":
 					System.out.println(varMap.get(split[2]));
+				}
+				break;
+
+			case "owp":
+				switch (split[1]) {
+				case "pwus":
+					doOp(split[2], split[3], (a, b) -> a + b);
+					break;
+
+				case "swub":
+					doOp(split[2], split[3], (a, b) -> a - b);
+					break;
+
+				case "muwt":
+					doOp(split[2], split[3], (a, b) -> a * b);
+					break;
+
+				case "dwiv":
+					doOp(split[2], split[3], (a, b) -> a / b);
 				}
 			}
 		}
+	}
+
+	private void doOp(String varA, String varB, OpInterface func) {
+		varMap.put(varB,
+				Float.toString(func.doOp(Float.parseFloat(varMap.get(varA)), Float.parseFloat(varMap.get(varB)))));
 	}
 
 	private static String buildString(String[] split, int startIndex) {

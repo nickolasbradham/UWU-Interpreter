@@ -3,3 +3,6 @@ vwar b 456
 pwint twext Test text. Here's some vars:
 pwint vwar a
 pwint vwar b
+pwint twext Added:
+owp pwus a b
+pwint vwar b
