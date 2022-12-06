@@ -1,8 +1,19 @@
+(^o^)-Basic vars.
 vwar a 123
 vwar b 456
 pwint twext Test text. Here's some vars:
 pwint vwar a
 pwint vwar b
+
+(^o^)-Basic math.
 pwint twext Added:
 owp pwus a b
 pwint vwar b
+
+(^o^)-Basic input.
+pwint twext Enter a number:
+inpwut c
+vwar d 5
+pwint twext mult 5...
+owp muwlt c d
+pwint vwar d

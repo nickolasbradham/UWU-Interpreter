@@ -9,13 +9,28 @@ import java.util.Scanner;
 final class Interpreter {
 
 	private final HashMap<String, String> varMap = new HashMap<>();
+	private final HashMap<String, Integer> labelMap = new HashMap<>();
+	private final Scanner in = new Scanner(System.in);
 	private final String[] lines;
 
 	private Interpreter(File f) throws FileNotFoundException {
 		Scanner s = new Scanner(f);
 		ArrayList<String> t = new ArrayList<>();
-		while (s.hasNext())
-			t.add(s.nextLine());
+		String read;
+		short line = 0;
+		while (s.hasNext()) {
+			read = s.nextLine();
+			if (!read.startsWith("(^o^)-") && !read.isBlank())
+				continue;
+
+			if (read.startsWith("wable:")) {
+				labelMap.put(read.substring(7), line + 1);
+				continue;
+			}
+
+			t.add(read);
+			line++;
+		}
 		s.close();
 		lines = t.toArray(new String[0]);
 	}
@@ -49,13 +64,17 @@ final class Interpreter {
 					doOp(split[2], split[3], (a, b) -> a - b);
 					break;
 
-				case "muwt":
+				case "muwlt":
 					doOp(split[2], split[3], (a, b) -> a * b);
 					break;
 
 				case "dwiv":
 					doOp(split[2], split[3], (a, b) -> a / b);
 				}
+				break;
+
+			case "inpwut":
+				varMap.put(split[1], in.nextLine());
 			}
 		}
 	}
