@@ -17,3 +17,19 @@ vwar d 5
 pwint twext mult 5...
 owp muwlt c d
 pwint vwar d
+
+(^o^)-Gowtu
+gowtu skip
+pwint twext You shouldn't see this.
+!skip
+pwint twext You should see this.
+
+(^o^)-Jump test
+vwar e 5
+wumpif gw8r c e land
+pwint twext No jump.
+gowtu endJump
+!land
+pwint twext Jump.
+!endJump
+pwint twext end jump test.

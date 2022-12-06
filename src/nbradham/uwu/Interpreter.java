@@ -17,14 +17,14 @@ final class Interpreter {
 		Scanner s = new Scanner(f);
 		ArrayList<String> t = new ArrayList<>();
 		String read;
-		short line = 0;
+		int line = -1;
 		while (s.hasNext()) {
 			read = s.nextLine();
-			if (!read.startsWith("(^o^)-") && !read.isBlank())
+			if (read.startsWith("(^o^)-") && !read.isBlank())
 				continue;
 
-			if (read.startsWith("wable:")) {
-				labelMap.put(read.substring(7), line + 1);
+			if (read.startsWith("!")) {
+				labelMap.put(read.substring(1), line);
 				continue;
 			}
 
@@ -36,7 +36,7 @@ final class Interpreter {
 	}
 
 	private void start() {
-		for (byte l = 0; l < lines.length; l++) {
+		for (int l = 0; l < lines.length; l++) {
 			String[] split = lines[l].split(" ");
 			switch (split[0]) {
 			case "vwar":
@@ -75,13 +75,40 @@ final class Interpreter {
 
 			case "inpwut":
 				varMap.put(split[1], in.nextLine());
+				break;
+
+			case "gowtu":
+				l = labelMap.get(split[1]);
+				break;
+
+			case "wumpif":
+				boolean result = false;
+				switch (split[1]) {
+				case "eqwal":
+					result = doOpRet(split[2], split[3], (a, b) -> a - b) == 0;
+					break;
+				case "gw8r":
+					result = doOpRet(split[2], split[3], (a, b) -> a - b) > 0;
+					break;
+				case "gw8rOrEqwal":
+					result = doOpRet(split[2], split[3], (a, b) -> a - b) >= 0;
+					break;
+				case "notEqwal":
+					result = doOpRet(split[2], split[3], (a, b) -> a - b) != 0;
+					break;
+				}
+				if (result)
+					l = labelMap.get(split[4]);
 			}
 		}
 	}
 
 	private void doOp(String varA, String varB, OpInterface func) {
-		varMap.put(varB,
-				Float.toString(func.doOp(Float.parseFloat(varMap.get(varA)), Float.parseFloat(varMap.get(varB)))));
+		varMap.put(varB, Float.toString(doOpRet(varA, varB, func)));
+	}
+
+	private float doOpRet(String varA, String varB, OpInterface func) {
+		return func.doOp(Float.parseFloat(varMap.get(varA)), Float.parseFloat(varMap.get(varB)));
 	}
 
 	private static String buildString(String[] split, int startIndex) {
