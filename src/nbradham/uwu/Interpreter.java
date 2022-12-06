@@ -87,15 +87,17 @@ final class Interpreter {
 				case "eqwal":
 					result = doOpRet(split[2], split[3], (a, b) -> a - b) == 0;
 					break;
+
 				case "gw8r":
 					result = doOpRet(split[2], split[3], (a, b) -> a - b) > 0;
 					break;
+
 				case "gw8rOrEqwal":
 					result = doOpRet(split[2], split[3], (a, b) -> a - b) >= 0;
 					break;
+
 				case "notEqwal":
 					result = doOpRet(split[2], split[3], (a, b) -> a - b) != 0;
-					break;
 				}
 				if (result)
 					l = labelMap.get(split[4]);
