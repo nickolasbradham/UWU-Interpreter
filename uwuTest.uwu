@@ -1,0 +1,5 @@
+vwar a 123
+vwar b 456
+pwint twext Test text. Here's some vars:
+pwint vwar a
+pwint vwar b
