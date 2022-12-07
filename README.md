@@ -23,3 +23,13 @@ Commands take the form of: `command [subcommand] [args...]`
   - `pwus <src var> <dest var>` Adds `src var` to `dest var` and places the result in `dest var`.
   - `swub <src var> <dest var>` Subtracts `src var` by `dest var` and places the result in `dest var`.
 - `pwint <var>` Outputs `var` to standard out.
+- `subwutine <label>` Moves execution to label with it's own local variable scope.
+- `vwar <subcommand>` Handles variable creation.
+  - `gwobaw <var> <value>` Creates global variable `var` and places `value` in it. `value` can contain spaces.
+  - `wocaw <var> <value>` Creates a local variable `var` and places `value` in it. This is only effective if you use `subwutine`s.
+- `wetwurn` Returns execution to the last place calling `subwutine`.
+- `wumpif <subcommand>` Jumps to other lables on a condition.
+  - `eqwal <var a> <var b> <label>` Jumps to `label` if `var a = var b`.
+  - `gw8r <var a> <var b> <label>` Jumps to `label` if `var a > var b`.
+  - `gw8rOrEqwal <var a> <var b> <label>` Jumps to `label` if `var a >= var b`.
+  - `notEqwal <var a> <var b> <label>` Jumps to `label` if `var a != var b`.
