@@ -57,3 +57,15 @@ wumpif eqwal f g strJump
 pwint twext You shouldn't see this.
 !strJump
 pwint twext You should see this.
+
+(^o^) Append test.
+vwar wocaw a Test
+owp awpend a a
+pwint vwar a
+
+(^o^) File test.
+fwile opwen a testIn.txt
+fwile nwext a b
+fwile nwext a b
+fwile cwose a
+pwint vwar b

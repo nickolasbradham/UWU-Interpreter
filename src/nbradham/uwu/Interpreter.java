@@ -39,7 +39,7 @@ final class Interpreter {
 		lines = t.toArray(new String[0]);
 	}
 
-	private void start() {
+	private void start() throws FileNotFoundException {
 		String tmpStr;
 		boolean tmpBool;
 		StackEntry tmpSE;
@@ -88,6 +88,9 @@ final class Interpreter {
 					break;
 				case "cowpy":
 					putVar(split[3], getVar(split[2]));
+					break;
+				case "awpend":
+					putVar(split[3], (String) getVar(split[3]) + getVar(split[2]));
 				}
 				break;
 
@@ -131,6 +134,19 @@ final class Interpreter {
 				tmpSE = stack.pop();
 				l = tmpSE.retLine();
 				locVarMap = tmpSE.locVars();
+				break;
+
+			case "fwile":
+				switch (split[1]) {
+				case "opwen":
+					putVar(split[2], new Scanner(new File(buildString(split, 3))));
+					break;
+				case "cwose":
+					((Scanner) getVar(split[2])).close();
+					break;
+				case "nwext":
+					putVar(split[3], ((Scanner) getVar(split[2])).next());
+				}
 			}
 		}
 	}
