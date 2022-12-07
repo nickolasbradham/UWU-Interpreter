@@ -56,129 +56,142 @@ final class Interpreter {
 	 * 
 	 * @throws FileNotFoundException Thrown by {@link Scanner#Scanner(File)}.
 	 */
-	private void start() throws FileNotFoundException {
+	private void start() {
 		String tmpStr;
 		boolean tmpBool;
 		StackEntry tmpSE;
 		for (int l = 0; l < lines.length; l++) {
-			String[] split = lines[l].split(" ");
-			switch (split[0]) {
-			case "vwar":
-				tmpStr = buildString(split, 3);
-				switch (split[1]) {
-				case "gwobaw":
-					globVarMap.put(split[2], tmpStr);
-					break;
-
-				case "wocaw":
-					locVarMap.put(split[2], tmpStr);
-				}
-				break;
-
-			case "pwint":
-				switch (split[1]) {
-				case "twext":
-					System.out.println(buildString(split, 2));
-					break;
-
+			try {
+				String[] split = lines[l].split(" ");
+				switch (split[0]) {
 				case "vwar":
-					System.out.println(getVar(split[2]));
+					tmpStr = buildString(split, 3);
+					switch (split[1]) {
+					case "gwobaw":
+						globVarMap.put(split[2], tmpStr);
+						break;
+
+					case "wocaw":
+						locVarMap.put(split[2], tmpStr);
+					}
+					break;
+
+				case "pwint":
+					switch (split[1]) {
+					case "twext":
+						System.out.println(buildString(split, 2));
+						break;
+
+					case "vwar":
+						System.out.println(getVar(split[2]));
+					}
+					break;
+
+				case "owp":
+					switch (split[1]) {
+					case "pwus":
+						doOp(split[2], split[3], (a, b) -> a + b);
+						break;
+
+					case "swub":
+						doOp(split[2], split[3], (a, b) -> a - b);
+						break;
+
+					case "muwlt":
+						doOp(split[2], split[3], (a, b) -> a * b);
+						break;
+
+					case "dwiv":
+						doOp(split[2], split[3], (a, b) -> a / b);
+						break;
+
+					case "cowpy":
+						putVar(split[3], getVar(split[2]));
+						break;
+
+					case "awpend":
+						putVar(split[3], (String) getVar(split[3]) + getVar(split[2]));
+						break;
+
+					case "chrawrAt":
+						putVar(split[4],
+								((String) getVar(split[2])).charAt(Integer.parseInt((String) getVar(split[3]))));
+					}
+					break;
+
+				case "inpwut":
+					putVar(split[1], in.nextLine());
+					break;
+
+				case "gowtu":
+					l = labelMap.get(split[1]);
+					break;
+
+				case "wumpif":
+					tmpBool = false;
+					switch (split[1]) {
+					case "eqwal":
+						tmpBool = varStrEq(split[2], split[3]) || doOpRet(split[2], split[3], (a, b) -> a - b) == 0;
+						break;
+
+					case "gw8r":
+						tmpBool = doOpRet(split[2], split[3], (a, b) -> a - b) > 0;
+						break;
+
+					case "gw8rOrEqwal":
+						tmpBool = doOpRet(split[2], split[3], (a, b) -> a - b) >= 0;
+						break;
+
+					case "notEqwal":
+						tmpBool = !varStrEq(split[2], split[3]) || (isVarNum(split[2]) && isVarNum(split[3])
+								&& doOpRet(split[2], split[3], (a, b) -> a - b) != 0);
+					}
+					if (tmpBool)
+						l = labelMap.get(split[4]);
+					break;
+
+				case "subwutine":
+					stack.add(new StackEntry(l, new HashMap<String, Object>(locVarMap)));
+					l = labelMap.get(split[1]);
+					break;
+
+				case "wetwurn":
+					tmpSE = stack.pop();
+					l = tmpSE.retLine();
+					locVarMap = tmpSE.locVars();
+					break;
+
+				case "fwile":
+					switch (split[1]) {
+					case "opwen":
+						putVar(split[2], new Scanner(new File(buildString(split, 3))));
+						break;
+					case "cwose":
+						((Scanner) getVar(split[2])).close();
+						break;
+					case "nwext":
+						putVar(split[3], ((Scanner) getVar(split[2])).next());
+					}
+					break;
+
+				case "awway":
+					switch (split[1]) {
+					case "cweate":
+						putVar(split[3], new Object[Integer.parseInt((String) getVar(split[2]))]);
+						break;
+
+					case "pwut":
+						((Object[]) getVar(split[3]))[Integer.parseInt((String) getVar(split[4]))] = getVar(split[2]);
+						break;
+
+					case "gewt":
+						putVar(split[4], ((Object[]) getVar(split[2]))[Integer.parseInt((String) getVar(split[3]))]);
+					}
 				}
-				break;
-
-			case "owp":
-				switch (split[1]) {
-				case "pwus":
-					doOp(split[2], split[3], (a, b) -> a + b);
-					break;
-
-				case "swub":
-					doOp(split[2], split[3], (a, b) -> a - b);
-					break;
-
-				case "muwlt":
-					doOp(split[2], split[3], (a, b) -> a * b);
-					break;
-
-				case "dwiv":
-					doOp(split[2], split[3], (a, b) -> a / b);
-					break;
-				case "cowpy":
-					putVar(split[3], getVar(split[2]));
-					break;
-				case "awpend":
-					putVar(split[3], (String) getVar(split[3]) + getVar(split[2]));
-				}
-				break;
-
-			case "inpwut":
-				putVar(split[1], in.nextLine());
-				break;
-
-			case "gowtu":
-				l = labelMap.get(split[1]);
-				break;
-
-			case "wumpif":
-				tmpBool = false;
-				switch (split[1]) {
-				case "eqwal":
-					tmpBool = varStrEq(split[2], split[3]) || doOpRet(split[2], split[3], (a, b) -> a - b) == 0;
-					break;
-
-				case "gw8r":
-					tmpBool = doOpRet(split[2], split[3], (a, b) -> a - b) > 0;
-					break;
-
-				case "gw8rOrEqwal":
-					tmpBool = doOpRet(split[2], split[3], (a, b) -> a - b) >= 0;
-					break;
-
-				case "notEqwal":
-					tmpBool = !varStrEq(split[2], split[3]) || (isVarNum(split[2]) && isVarNum(split[3])
-							&& doOpRet(split[2], split[3], (a, b) -> a - b) != 0);
-				}
-				if (tmpBool)
-					l = labelMap.get(split[4]);
-				break;
-
-			case "subwutine":
-				stack.add(new StackEntry(l, new HashMap<String, Object>(locVarMap)));
-				l = labelMap.get(split[1]);
-				break;
-
-			case "wetwurn":
-				tmpSE = stack.pop();
-				l = tmpSE.retLine();
-				locVarMap = tmpSE.locVars();
-				break;
-
-			case "fwile":
-				switch (split[1]) {
-				case "opwen":
-					putVar(split[2], new Scanner(new File(buildString(split, 3))));
-					break;
-				case "cwose":
-					((Scanner) getVar(split[2])).close();
-					break;
-				case "nwext":
-					putVar(split[3], ((Scanner) getVar(split[2])).next());
-				}
-				break;
-
-			case "awway":
-				switch (split[1]) {
-				case "cweate":
-					putVar(split[3], new Object[Integer.parseInt((String) getVar(split[2]))]);
-					break;
-
-				case "pwut":
-					((Object[]) getVar(split[3]))[Integer.parseInt((String) getVar(split[4]))] = getVar(split[2]);
-					break;
-					
-				case "gewt":
-					putVar(split[4], ((Object[]) getVar(split[2]))[Integer.parseInt((String) getVar(split[3]))]);
-				}
+			} catch (Exception e) {
+				System.err.printf("Exception in \"%s\", after line %d.%n", lines[l], l);
+				e.printStackTrace();
+				return;
 			}
 		}
 	}

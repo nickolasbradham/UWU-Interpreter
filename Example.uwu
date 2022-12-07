@@ -64,10 +64,10 @@ owp awpend a a
 pwint vwar a
 
 (^o^) File test.
-fwile opwen a testIn.txt
-fwile nwext a b
+fwile opwen a Example.uwu
 fwile nwext a b
 fwile cwose a
+pwint twext Read from file:
 pwint vwar b
 
 (^o^) Array test.
@@ -92,3 +92,9 @@ pwint vwar b
 vwar wocaw n 2
 awway gewt a n b
 pwint vwar b
+
+(^o^) charAt() test.
+vwar wocaw a Test string.
+vwar wocaw b 2
+owp chrawrAt a b c
+pwint vwar c
