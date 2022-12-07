@@ -49,3 +49,11 @@ wetwurn
 
 !endSub
 pwint twext End subroutine test.
+
+(^o^) String compare test.
+vwar wocaw f Test string.
+owp cowpy f g
+wumpif eqwal f g strJump
+pwint twext You shouldn't see this.
+!strJump
+pwint twext You should see this.

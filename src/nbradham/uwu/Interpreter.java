@@ -85,6 +85,9 @@ final class Interpreter {
 
 				case "dwiv":
 					doOp(split[2], split[3], (a, b) -> a / b);
+					break;
+				case "cowpy":
+					putVar(split[3], getVar(split[2]));
 				}
 				break;
 
@@ -100,7 +103,7 @@ final class Interpreter {
 				tmpBool = false;
 				switch (split[1]) {
 				case "eqwal":
-					tmpBool = doOpRet(split[2], split[3], (a, b) -> a - b) == 0;
+					tmpBool = varStrEq(split[2], split[3]) || doOpRet(split[2], split[3], (a, b) -> a - b) == 0;
 					break;
 
 				case "gw8r":
@@ -112,7 +115,8 @@ final class Interpreter {
 					break;
 
 				case "notEqwal":
-					tmpBool = doOpRet(split[2], split[3], (a, b) -> a - b) != 0;
+					tmpBool = !varStrEq(split[2], split[3]) || (isVarNum(split[2]) && isVarNum(split[3])
+							&& doOpRet(split[2], split[3], (a, b) -> a - b) != 0);
 				}
 				if (tmpBool)
 					l = labelMap.get(split[4]);
@@ -145,6 +149,19 @@ final class Interpreter {
 
 	private String getVar(String name) {
 		return (locVarMap.containsKey(name) ? locVarMap : globVarMap).get(name);
+	}
+
+	private boolean varStrEq(String a, String b) {
+		return getVar(a).equals(getVar(b));
+	}
+
+	private boolean isVarNum(String v) {
+		try {
+			Float.parseFloat(getVar(v));
+		} catch (NumberFormatException e) {
+			return false;
+		}
+		return true;
 	}
 
 	private static String buildString(String[] split, int startIndex) {
