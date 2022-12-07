@@ -2,6 +2,10 @@
 A trash Assembly-like, "uwu" based interpreted language.
 
 Commands take the form of: `command [subcommand] [args...]`
+You can have comment lines by starting the line with `(^o^)`.
+You can create label lines (used by `gowtu`, `subwutine`, and `wumpif`) by starting the line with `!`.
+
+Look at `Example.uwu` for examples of all the features and commands.
 
 ## Command List
 - `awway <subcommand>` Used for handling arrays.
