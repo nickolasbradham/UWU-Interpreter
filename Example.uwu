@@ -1,75 +1,80 @@
 (^o^)-Basic vars.
 vwar wocaw a 123
 vwar wocaw b 456
-pwint twext Test text. Here's some vars:
-pwint vwar a
-pwint vwar b
+pwint a
+pwint b
 
 (^o^)-Basic math.
-pwint twext Added:
 owp pwus a b
-pwint vwar b
+pwint b
 
 (^o^)-Basic input.
-pwint twext Enter a number:
+vwar wocaw a Input number:
+pwint a
 inpwut c
 vwar wocaw d 5
-pwint twext mult 5...
 owp muwlt c d
-pwint vwar d
+pwint d
 
 (^o^)-Gowtu
 gowtu skip
-pwint twext You shouldn't see this.
+vwar wocaw a You shouldn't see this.
+pwint a
 !skip
-pwint twext You should see this.
+vwar wocaw a You should see this.
+pwint a
 
 (^o^)-Jump test
 vwar wocaw e 5
 wumpif gw8r c e land
-pwint twext No jump.
+vwar wocaw No jump.
+pwint a
 gowtu endJump
 !land
-pwint twext Jump.
+vwar wocaw Jump.
+pwint a
 !endJump
-pwint twext end jump test.
 
 (^o^) Subroutine test.
 subwutine testSub
-pwint twext Main a:
-pwint vwar a
+vwar wocaw b Main a:
+pwint b
+pwint a
 subwutine testSub
 gowtu endSub
 
 !testSub
 vwar wocaw a 23
-pwint twext Local A:
-pwint vwar a
+vwar wocaw b Local A:
+pwint b
+pwint a
 wetwurn
 
 !endSub
-pwint twext End subroutine test.
 
 (^o^) String compare test.
 vwar wocaw f Test string.
 owp cowpy f g
 wumpif eqwal f g strJump
-pwint twext You shouldn't see this.
+vwar wocaw a You shouldn't see this.
+pwint a
 !strJump
-pwint twext You should see this.
+vwar wocaw a You should see this.
+pwint a
 
 (^o^) Append test.
 vwar wocaw a Test
 owp awpend a a
-pwint vwar a
+pwint a
 
 (^o^) File test.
 vwar wocaw b Example.uwu
 fwile opwen b a
 fwile nwext a b
 fwile cwose a
-pwint twext Read from file:
-pwint vwar b
+vwar wocaw c Read from file:
+pwint c
+pwint b
 
 (^o^) Array test.
 vwar wocaw n 3
@@ -86,16 +91,16 @@ awway pwut v a n
 
 vwar wocaw n 0
 awway gewt a n b
-pwint vwar b
+pwint b
 vwar wocaw n 1
 awway gewt a n b
-pwint vwar b
+pwint b
 vwar wocaw n 2
 awway gewt a n b
-pwint vwar b
+pwint b
 
 (^o^) charAt() test.
 vwar wocaw a Test string.
 vwar wocaw b 2
 owp chrawrAt a b c
-pwint vwar c
+pwint c

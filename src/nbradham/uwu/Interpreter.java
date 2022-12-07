@@ -135,14 +135,7 @@ final class Interpreter {
 					break;
 
 				case "pwint":
-					switch (split[1]) {
-					case "twext":
-						System.out.println(buildString(split, 2));
-						break;
-
-					case "vwar":
-						System.out.println(getVar(split[2]));
-					}
+					System.out.println(getVar(split[1]));
 					break;
 
 				case "subwutine":
