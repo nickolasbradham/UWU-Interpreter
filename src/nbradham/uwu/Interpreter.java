@@ -90,7 +90,7 @@ final class Interpreter {
 						break;
 
 					case "opwen":
-						putVar(split[2], new Scanner(new File(buildString(split, 3))));
+						putVar(split[3], new Scanner(new File((String) getVar(split[2]))));
 					}
 					break;
 
