@@ -9,13 +9,13 @@ import java.util.Stack;
 
 final class Interpreter {
 
-	private final HashMap<String, String> globVarMap = new HashMap<>();
+	private final HashMap<String, Object> globVarMap = new HashMap<>();
 	private final HashMap<String, Integer> labelMap = new HashMap<>();
 	private final Stack<StackEntry> stack = new Stack<>();
 	private final Scanner in = new Scanner(System.in);
 	private final String[] lines;
 
-	private HashMap<String, String> locVarMap = new HashMap<>();
+	private HashMap<String, Object> locVarMap = new HashMap<>();
 
 	private Interpreter(File f) throws FileNotFoundException {
 		Scanner s = new Scanner(f);
@@ -123,7 +123,7 @@ final class Interpreter {
 				break;
 
 			case "subwutine":
-				stack.add(new StackEntry(l, new HashMap<String, String>(locVarMap)));
+				stack.add(new StackEntry(l, new HashMap<String, Object>(locVarMap)));
 				l = labelMap.get(split[1]);
 				break;
 
@@ -140,14 +140,14 @@ final class Interpreter {
 	}
 
 	private float doOpRet(String varA, String varB, OpInterface func) {
-		return func.doOp(Float.parseFloat(getVar(varA)), Float.parseFloat(getVar(varB)));
+		return func.doOp(Float.parseFloat((String) getVar(varA)), Float.parseFloat((String) getVar(varB)));
 	}
 
-	private void putVar(String name, String val) {
-		(locVarMap.containsKey(name) ? locVarMap : globVarMap).put(name, val);
+	private void putVar(String name, Object object) {
+		(locVarMap.containsKey(name) ? locVarMap : globVarMap).put(name, object);
 	}
 
-	private String getVar(String name) {
+	private Object getVar(String name) {
 		return (locVarMap.containsKey(name) ? locVarMap : globVarMap).get(name);
 	}
 
@@ -157,7 +157,7 @@ final class Interpreter {
 
 	private boolean isVarNum(String v) {
 		try {
-			Float.parseFloat(getVar(v));
+			Float.parseFloat((String) getVar(v));
 		} catch (NumberFormatException e) {
 			return false;
 		}
