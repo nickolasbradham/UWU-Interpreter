@@ -5,13 +5,17 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.Stack;
 
 final class Interpreter {
 
-	private final HashMap<String, String> varMap = new HashMap<>();
+	private final HashMap<String, String> globVarMap = new HashMap<>();
 	private final HashMap<String, Integer> labelMap = new HashMap<>();
+	private final Stack<StackEntry> stack = new Stack<>();
 	private final Scanner in = new Scanner(System.in);
 	private final String[] lines;
+
+	private HashMap<String, String> locVarMap = new HashMap<>();
 
 	private Interpreter(File f) throws FileNotFoundException {
 		Scanner s = new Scanner(f);
@@ -20,7 +24,7 @@ final class Interpreter {
 		int line = -1;
 		while (s.hasNext()) {
 			read = s.nextLine();
-			if (read.startsWith("(^o^)-") && !read.isBlank())
+			if (read.startsWith("(^o^)") && !read.isBlank())
 				continue;
 
 			if (read.startsWith("!")) {
@@ -36,11 +40,22 @@ final class Interpreter {
 	}
 
 	private void start() {
+		String tmpStr;
+		boolean tmpBool;
+		StackEntry tmpSE;
 		for (int l = 0; l < lines.length; l++) {
 			String[] split = lines[l].split(" ");
 			switch (split[0]) {
 			case "vwar":
-				varMap.put(split[1], buildString(split, 2));
+				tmpStr = buildString(split, 3);
+				switch (split[1]) {
+				case "gwobaw":
+					globVarMap.put(split[2], tmpStr);
+					break;
+
+				case "wocaw":
+					locVarMap.put(split[2], tmpStr);
+				}
 				break;
 
 			case "pwint":
@@ -50,7 +65,7 @@ final class Interpreter {
 					break;
 
 				case "vwar":
-					System.out.println(varMap.get(split[2]));
+					System.out.println(getVar(split[2]));
 				}
 				break;
 
@@ -74,7 +89,7 @@ final class Interpreter {
 				break;
 
 			case "inpwut":
-				varMap.put(split[1], in.nextLine());
+				putVar(split[1], in.nextLine());
 				break;
 
 			case "gowtu":
@@ -82,35 +97,54 @@ final class Interpreter {
 				break;
 
 			case "wumpif":
-				boolean result = false;
+				tmpBool = false;
 				switch (split[1]) {
 				case "eqwal":
-					result = doOpRet(split[2], split[3], (a, b) -> a - b) == 0;
+					tmpBool = doOpRet(split[2], split[3], (a, b) -> a - b) == 0;
 					break;
 
 				case "gw8r":
-					result = doOpRet(split[2], split[3], (a, b) -> a - b) > 0;
+					tmpBool = doOpRet(split[2], split[3], (a, b) -> a - b) > 0;
 					break;
 
 				case "gw8rOrEqwal":
-					result = doOpRet(split[2], split[3], (a, b) -> a - b) >= 0;
+					tmpBool = doOpRet(split[2], split[3], (a, b) -> a - b) >= 0;
 					break;
 
 				case "notEqwal":
-					result = doOpRet(split[2], split[3], (a, b) -> a - b) != 0;
+					tmpBool = doOpRet(split[2], split[3], (a, b) -> a - b) != 0;
 				}
-				if (result)
+				if (tmpBool)
 					l = labelMap.get(split[4]);
+				break;
+
+			case "subwutine":
+				stack.add(new StackEntry(l, new HashMap<String, String>(locVarMap)));
+				l = labelMap.get(split[1]);
+				break;
+
+			case "wetwurn":
+				tmpSE = stack.pop();
+				l = tmpSE.retLine();
+				locVarMap = tmpSE.locVars();
 			}
 		}
 	}
 
 	private void doOp(String varA, String varB, OpInterface func) {
-		varMap.put(varB, Float.toString(doOpRet(varA, varB, func)));
+		putVar(varB, Float.toString(doOpRet(varA, varB, func)));
 	}
 
 	private float doOpRet(String varA, String varB, OpInterface func) {
-		return func.doOp(Float.parseFloat(varMap.get(varA)), Float.parseFloat(varMap.get(varB)));
+		return func.doOp(Float.parseFloat(getVar(varA)), Float.parseFloat(getVar(varB)));
+	}
+
+	private void putVar(String name, String val) {
+		(locVarMap.containsKey(name) ? locVarMap : globVarMap).put(name, val);
+	}
+
+	private String getVar(String name) {
+		return (locVarMap.containsKey(name) ? locVarMap : globVarMap).get(name);
 	}
 
 	private static String buildString(String[] split, int startIndex) {

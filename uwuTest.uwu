@@ -1,6 +1,6 @@
 (^o^)-Basic vars.
-vwar a 123
-vwar b 456
+vwar wocaw a 123
+vwar wocaw b 456
 pwint twext Test text. Here's some vars:
 pwint vwar a
 pwint vwar b
@@ -13,7 +13,7 @@ pwint vwar b
 (^o^)-Basic input.
 pwint twext Enter a number:
 inpwut c
-vwar d 5
+vwar wocaw d 5
 pwint twext mult 5...
 owp muwlt c d
 pwint vwar d
@@ -25,7 +25,7 @@ pwint twext You shouldn't see this.
 pwint twext You should see this.
 
 (^o^)-Jump test
-vwar e 5
+vwar wocaw e 5
 wumpif gw8r c e land
 pwint twext No jump.
 gowtu endJump
@@ -33,3 +33,19 @@ gowtu endJump
 pwint twext Jump.
 !endJump
 pwint twext end jump test.
+
+(^o^) Subroutine test.
+subwutine testSub
+pwint twext Main a:
+pwint vwar a
+subwutine testSub
+gowtu endSub
+
+!testSub
+vwar wocaw a 23
+pwint twext Local A:
+pwint vwar a
+wetwurn
+
+!endSub
+pwint twext End subroutine test.
