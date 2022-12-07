@@ -164,6 +164,21 @@ final class Interpreter {
 				case "nwext":
 					putVar(split[3], ((Scanner) getVar(split[2])).next());
 				}
+				break;
+
+			case "awway":
+				switch (split[1]) {
+				case "cweate":
+					putVar(split[3], new Object[Integer.parseInt((String) getVar(split[2]))]);
+					break;
+
+				case "pwut":
+					((Object[]) getVar(split[3]))[Integer.parseInt((String) getVar(split[4]))] = getVar(split[2]);
+					break;
+					
+				case "gewt":
+					putVar(split[4], ((Object[]) getVar(split[2]))[Integer.parseInt((String) getVar(split[3]))]);
+				}
 			}
 		}
 	}

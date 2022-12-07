@@ -69,3 +69,26 @@ fwile nwext a b
 fwile nwext a b
 fwile cwose a
 pwint vwar b
+
+(^o^) Array test.
+vwar wocaw n 3
+awway cweate n a
+vwar wocaw n 0
+vwar wocaw v 1
+awway pwut v a n
+vwar wocaw n 1
+vwar wocaw v 2
+awway pwut v a n
+vwar wocaw n 2
+vwar wocaw v 3
+awway pwut v a n
+
+vwar wocaw n 0
+awway gewt a n b
+pwint vwar b
+vwar wocaw n 1
+awway gewt a n b
+pwint vwar b
+vwar wocaw n 2
+awway gewt a n b
+pwint vwar b
