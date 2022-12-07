@@ -7,6 +7,12 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Stack;
 
+/**
+ * Core interpreter code.
+ * 
+ * @author Nickolas Bradham
+ *
+ */
 final class Interpreter {
 
 	private final HashMap<String, Object> globVarMap = new HashMap<>();
@@ -17,8 +23,14 @@ final class Interpreter {
 
 	private HashMap<String, Object> locVarMap = new HashMap<>();
 
-	private Interpreter(File f) throws FileNotFoundException {
-		Scanner s = new Scanner(f);
+	/**
+	 * Constructs a new Interpreter and prepares it for execution.
+	 * 
+	 * @param file The UWU file to execute.
+	 * @throws FileNotFoundException Thrown by {@link Scanner#Scanner(File)}.
+	 */
+	private Interpreter(File file) throws FileNotFoundException {
+		Scanner s = new Scanner(file);
 		ArrayList<String> t = new ArrayList<>();
 		String read;
 		int line = -1;
@@ -39,6 +51,11 @@ final class Interpreter {
 		lines = t.toArray(new String[0]);
 	}
 
+	/**
+	 * Starts the interpreter and executes the UWU code.
+	 * 
+	 * @throws FileNotFoundException Thrown by {@link Scanner#Scanner(File)}.
+	 */
 	private void start() throws FileNotFoundException {
 		String tmpStr;
 		boolean tmpBool;
@@ -151,26 +168,69 @@ final class Interpreter {
 		}
 	}
 
+	/**
+	 * Forwards to {@link #doOpRet(String, String, OpInterface)} and stores result
+	 * in {@code varB} in the interpreter variable space.
+	 * 
+	 * @param varA The first argument variable.
+	 * @param varB The second and destination variable.
+	 * @param func The OpInterface to run the input in.
+	 */
 	private void doOp(String varA, String varB, OpInterface func) {
 		putVar(varB, Float.toString(doOpRet(varA, varB, func)));
 	}
 
+	/**
+	 * Calls {@link OpInterface#doOp(float, float)} provided by {@code func} on
+	 * {@code varA} and {@code varB}.
+	 * 
+	 * @param varA The first argument.
+	 * @param varB The second argument.
+	 * @param func The OpInterface to call.
+	 * @return The value computed.
+	 */
 	private float doOpRet(String varA, String varB, OpInterface func) {
 		return func.doOp(Float.parseFloat((String) getVar(varA)), Float.parseFloat((String) getVar(varB)));
 	}
 
-	private void putVar(String name, Object object) {
-		(locVarMap.containsKey(name) ? locVarMap : globVarMap).put(name, object);
+	/**
+	 * Puts {@code value} into the local or global variable space.
+	 * 
+	 * @param name  The variable name.
+	 * @param value The value to store.
+	 */
+	private void putVar(String name, Object value) {
+		(locVarMap.containsKey(name) ? locVarMap : globVarMap).put(name, value);
 	}
 
+	/**
+	 * Retrieves variable {@code name} from the local or global variable space.
+	 * 
+	 * @param name The name of the variable to retrieve.
+	 * @return The Object stored at {@code name}.
+	 */
 	private Object getVar(String name) {
 		return (locVarMap.containsKey(name) ? locVarMap : globVarMap).get(name);
 	}
 
+	/**
+	 * Compares variables {@code a} and {@code b}.
+	 * 
+	 * @param a The first variable.
+	 * @param b The second variable.
+	 * @return The result of doing {@code a.equals(b)} after retrieving {@code a}
+	 *         and {@code b} from the variable space.
+	 */
 	private boolean varStrEq(String a, String b) {
 		return getVar(a).equals(getVar(b));
 	}
 
+	/**
+	 * Tests if {@code v} is a number.
+	 * 
+	 * @param v The variable to test.
+	 * @return True if the value was successfully parsed into a number.
+	 */
 	private boolean isVarNum(String v) {
 		try {
 			Float.parseFloat((String) getVar(v));
@@ -180,6 +240,13 @@ final class Interpreter {
 		return true;
 	}
 
+	/**
+	 * Constructs a string from the remaining elements of {@code split}.
+	 * 
+	 * @param split      The String array to get data from.
+	 * @param startIndex The starting index to build the String from.
+	 * @return The resulting String.
+	 */
 	private static String buildString(String[] split, int startIndex) {
 		StringBuilder sb = new StringBuilder(split[startIndex]);
 		for (int i = startIndex + 1; i < split.length; i++) {
@@ -189,6 +256,13 @@ final class Interpreter {
 		return sb.toString();
 	}
 
+	/**
+	 * Checks args and starts interpreter.
+	 * 
+	 * @param args Command line arguments.
+	 * @throws FileNotFoundException Thrown by {@link #Interpreter(File)} and
+	 *                               {@link #start()}.
+	 */
 	public static void main(String[] args) throws FileNotFoundException {
 		if (args.length < 1) {
 			System.out.println("Argwuments: <uwu>\n uwu - the pwogwam fwile to run.");
