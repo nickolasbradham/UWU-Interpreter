@@ -25,10 +25,10 @@ Look at `Examples` directory for examples of all the features and commands.
   - `awpend <src var> <dest var>` Appends `src` onto the end of `dest`.
   - `chrawrAt <str var> <index var> <dest var>` Retrieves the character in `str var` at `index var` and places it in `dest var`.
   - `cowpy <src var> <dest var>` Copies value in `src var` and overwrites `dest var`.
-  - `dwiv <src var> <dest var>` Divides `src var` by `dest var` and places the result in `dest var`.
-  - `muwlt <src var> <dest var>` Multiplies `src var` by `dest var` and places the result in `dest var`.
+  - `dwiv <src var> <dest var>` Divides `dest var` by `src var` and places the result in `dest var`.
+  - `muwlt <src var> <dest var>` Multiplies `dest var` by `src var` and places the result in `dest var`.
   - `pwus <src var> <dest var>` Adds `src var` to `dest var` and places the result in `dest var`.
-  - `swub <src var> <dest var>` Subtracts `src var` by `dest var` and places the result in `dest var`.
+  - `swub <src var> <dest var>` Subtracts `src var` from `dest var` and places the result in `dest var`.
 - `pwint <var>` Outputs `var` to standard out.
 - `subwutine <label>` Moves execution to label with it's own local variable scope.
 - `vwar <subcommand>` Handles variable creation.
