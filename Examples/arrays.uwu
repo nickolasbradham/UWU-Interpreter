@@ -1,0 +1,53 @@
+(^o^) 1D array
+vwar gwobaw text 1D Array:
+pwint text
+
+vwar gwobaw size 2
+awway cweate size arr1
+
+vwar gwobaw val 1
+vwar gwobaw ind 0
+awway pwut val arr1 ind
+vwar gwobaw val 2
+vwar gwobaw ind 1
+awway pwut val arr1 ind
+
+vwar gwobaw ind 0
+awway gewt arr1 ind val
+pwint val
+vwar gwobaw ind 1
+awway gewt arr1 ind val
+pwint val
+
+
+(^o^) 2D array
+vwar gwobaw text 2D Array:
+pwint text
+awway cweate size arr2
+vwar gwobaw ind 0
+awway pwut arr1 arr2 ind
+
+vwar gwobaw val 3
+vwar gwobaw ind 0
+vwar gwobaw size 2
+awway cweate size arr1
+awway pwut val arr1 ind
+vwar gwobaw val 4
+vwar gwobaw ind 1
+awway pwut val arr1 ind
+awway pwut arr1 arr2 ind
+
+vwar gwobaw ind 0
+awway gewt arr2 ind arr1
+awway gewt arr1 ind val
+pwint val
+vwar gwobaw ind 1
+awway gewt arr1 ind val
+pwint val
+awway gewt arr2 ind arr1
+vwar gwobaw ind 0
+awway gewt arr1 ind val
+pwint val
+vwar gwobaw ind 1
+awway gewt arr1 ind val
+pwint val
