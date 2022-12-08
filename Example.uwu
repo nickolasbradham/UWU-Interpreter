@@ -69,7 +69,7 @@ pwint a
 
 (^o^) File test.
 vwar wocaw b Example.uwu
-fwile opwen b a
+fwile opwen r b a
 fwile nwext a b
 fwile cwose a
 vwar wocaw c Read from file:
@@ -104,3 +104,8 @@ vwar wocaw a Test string.
 vwar wocaw b 2
 owp chrawrAt a b c
 pwint c
+
+vwar wocaw fp out.txt
+fwile opwen w fp a
+fwile pwint fp a
+fwile cwose a

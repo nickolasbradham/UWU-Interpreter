@@ -2,6 +2,7 @@ package nbradham.uwu;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -60,6 +61,7 @@ final class Interpreter {
 		String tmpStr;
 		boolean tmpBool;
 		StackEntry tmpSE;
+		Object tmpObj = null;
 		for (int l = 0; l < lines.length; l++) {
 			try {
 				String[] split = lines[l].split(" ");
@@ -82,7 +84,11 @@ final class Interpreter {
 				case "fwile":
 					switch (split[1]) {
 					case "cwose":
-						((Scanner) getVar(split[2])).close();
+						tmpObj = getVar(split[2]);
+						if (tmpObj instanceof Scanner)
+							((Scanner) tmpObj).close();
+						else
+							((PrintWriter) tmpObj).close();
 						break;
 
 					case "nwext":
@@ -90,7 +96,19 @@ final class Interpreter {
 						break;
 
 					case "opwen":
-						putVar(split[3], new Scanner(new File((String) getVar(split[2]))));
+						switch (split[2]) {
+						case "r":
+							tmpObj = new Scanner(new File((String) getVar(split[3])));
+							break;
+
+						case "w":
+							tmpObj = new PrintWriter((String) getVar(split[3]));
+						}
+						putVar(split[4], tmpObj);
+						break;
+
+					case "pwint":
+						((PrintWriter) getVar(split[3])).println(getVar(split[2]));
 					}
 					break;
 
