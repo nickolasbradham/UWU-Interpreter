@@ -1,0 +1,27 @@
+vwar gwobaw one 1
+vwar gwobaw two 2
+vwar gwobaw ret 0
+
+vwar wocaw prompt Enter n:
+pwint prompt
+vwar wocaw n 0
+inpwut n
+
+owp cowpy n arg
+subwutine fact
+pwint ret
+gowtu end
+
+!fact
+wumpif gw8r arg two recurse
+vwar gwobaw ret 2
+wetwurn
+!recurse
+vwar wocaw n 0
+owp cowpy arg n
+owp swub one arg
+subwutine fact
+owp muwlt n ret
+wetwurn
+
+!end

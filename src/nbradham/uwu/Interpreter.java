@@ -133,19 +133,19 @@ final class Interpreter {
 						break;
 
 					case "dwiv":
-						doOp(split[2], split[3], (a, b) -> a / b);
+						doOp(split[2], split[3], (a, b) -> b / a);
 						break;
 
 					case "muwlt":
-						doOp(split[2], split[3], (a, b) -> a * b);
+						doOp(split[2], split[3], (a, b) -> b * a);
 						break;
 
 					case "pwus":
-						doOp(split[2], split[3], (a, b) -> a + b);
+						doOp(split[2], split[3], (a, b) -> b + a);
 						break;
 
 					case "swub":
-						doOp(split[2], split[3], (a, b) -> a - b);
+						doOp(split[2], split[3], (a, b) -> b - a);
 					}
 					break;
 
