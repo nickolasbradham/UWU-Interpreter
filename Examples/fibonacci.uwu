@@ -1,0 +1,16 @@
+vwar wocaw prompt How many?
+pwint prompt
+inpwut n
+vwar wocaw last 0
+vwar wocaw cur 1
+vwar wocaw count 1
+vwar wocaw one 1
+pwint one
+!loop
+owp cowpy cur tmp
+owp pwus last tmp
+pwint tmp
+owp cowpy cur last
+owp cowpy tmp cur
+owp pwus one count
+wumpif gw8r n count loop
