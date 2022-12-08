@@ -105,6 +105,7 @@ vwar wocaw b 2
 owp chrawrAt a b c
 pwint c
 
+(^o^) File output.
 vwar wocaw fp out.txt
 fwile opwen w fp a
 fwile pwint fp a
