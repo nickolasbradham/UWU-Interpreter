@@ -17,7 +17,8 @@ Look at `Example.uwu` for examples of all the features and commands.
 - `fwile <subcommand>` Used for file operations.
   - `cwose <file ref var>` Closes file stream.
   - `nwext <file ref var> <dest var>` Reads the next token from the file into `dest var`.
-  - `opwen <file path var> <file ref var>` Opens a file and stores stream reference in `file ref var`.
+  - `opwen <r|w> <file path var> <file ref var>` Opens a file for reading (`r`) or writing (`w`) and stores reference in `file ref var`.
+  - `pwint <var> <file ref>` Prints `var` to `file ref` stream.
 - `gowtu <label>` Transfers execution to target label.
 - `inpwut <var>` Reads a line from standard input and puts it into `var`.
 - `owp <subcommand>` Used for handling operations on variables.
