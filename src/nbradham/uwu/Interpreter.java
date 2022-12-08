@@ -60,7 +60,7 @@ final class Interpreter {
 	 */
 	private void start() {
 		String tmpStr;
-		boolean tmpBool;
+		boolean tmpBool = false;
 		StackEntry tmpSE;
 		Object tmpObj = null;
 		for (int l = 0; l < lines.length; l++) {
@@ -171,13 +171,11 @@ final class Interpreter {
 					break;
 
 				case "wetwurn":
-					tmpSE = stack.pop();
-					l = tmpSE.retLine();
+					l = (tmpSE = stack.pop()).retLine();
 					locVarMap = tmpSE.locVars();
 					break;
 
 				case "wumpif":
-					tmpBool = false;
 					switch (split[1]) {
 					case "eqwal":
 						tmpBool = varStrEq(split[2], split[3]) || doOpRet(split[2], split[3], (a, b) -> a - b) == 0;
