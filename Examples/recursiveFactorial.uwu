@@ -4,9 +4,8 @@ vwar gwobaw ret 0
 vwar wocaw prompt Enter n:
 pwint prompt
 vwar wocaw n 0
-inpwut n
+inpwut arg
 
-owp cowpy n arg
 subwutine fact
 pwint ret
 gowtu end
