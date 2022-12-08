@@ -1,5 +1,6 @@
 package nbradham.uwu;
 
+import java.io.Closeable;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -84,11 +85,7 @@ final class Interpreter {
 				case "fwile":
 					switch (split[1]) {
 					case "cwose":
-						tmpObj = getVar(split[2]);
-						if (tmpObj instanceof Scanner)
-							((Scanner) tmpObj).close();
-						else
-							((PrintWriter) tmpObj).close();
+						((Closeable) tmpObj).close();
 						break;
 
 					case "nwext":
