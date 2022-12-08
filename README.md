@@ -1,5 +1,5 @@
 # UWU-Interpreter
-A trash Assembly-like, "uwu" based interpreted language.
+An Assembly-like, "uwu" based interpreted language.
 
 Commands take the form of: `command [subcommand] [args...]`
 
