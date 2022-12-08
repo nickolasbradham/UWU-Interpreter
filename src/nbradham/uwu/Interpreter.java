@@ -33,7 +33,7 @@ final class Interpreter {
 	 */
 	private Interpreter(File file) throws FileNotFoundException {
 		Scanner s = new Scanner(file);
-		ArrayList<String> t = new ArrayList<>();
+		ArrayList<String> progBuild = new ArrayList<>();
 		String read;
 		int line = -1;
 		while (s.hasNext()) {
@@ -46,11 +46,11 @@ final class Interpreter {
 				continue;
 			}
 
-			t.add(read);
+			progBuild.add(read);
 			line++;
 		}
 		s.close();
-		lines = t.toArray(new String[0]);
+		lines = progBuild.toArray(new String[0]);
 	}
 
 	/**
