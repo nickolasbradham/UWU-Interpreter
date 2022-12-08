@@ -7,7 +7,7 @@ You can have comment lines by starting the line with `(^o^)`.
 
 You can create label lines (used by `gowtu`, `subwutine`, and `wumpif`) by starting the line with `!`.
 
-Look at `Example.uwu` for examples of all the features and commands.
+Look at `Examples` directory for examples of all the features and commands.
 
 ## Command List
 - `awway <subcommand>` Used for handling arrays.
