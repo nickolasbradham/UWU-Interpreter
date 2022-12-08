@@ -1,5 +1,4 @@
 vwar gwobaw one 1
-vwar gwobaw two 2
 vwar gwobaw ret 0
 
 vwar wocaw prompt Enter n:
@@ -13,8 +12,8 @@ pwint ret
 gowtu end
 
 !fact
-wumpif gw8r arg two recurse
-vwar gwobaw ret 2
+wumpif gw8r arg one recurse
+vwar gwobaw ret 1
 wetwurn
 !recurse
 vwar wocaw n 0
