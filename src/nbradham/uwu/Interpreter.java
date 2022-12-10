@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -16,6 +17,8 @@ import java.util.Stack;
  *
  */
 final class Interpreter {
+
+	private static final Random RAND = new Random();
 
 	private final HashMap<String, Object> globVarMap = new HashMap<>();
 	private final HashMap<String, Integer> labelMap = new HashMap<>();
@@ -167,6 +170,16 @@ final class Interpreter {
 
 					case "wocaw":
 						locVarMap.put(split[2], tmpStr);
+					}
+					break;
+
+				case "wandom":
+					switch (split[1]) {
+					case "sweed":
+						RAND.setSeed((long) Float.parseFloat((String) getVar(split[2])));
+						break;
+					case "gewt":
+						putVar(split[3], RAND.nextInt((int) Float.parseFloat((String) getVar(split[2]))));
 					}
 					break;
 

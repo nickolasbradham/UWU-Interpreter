@@ -67,15 +67,6 @@ vwar wocaw a Test
 owp awpend a a
 pwint a
 
-(^o^) File test.
-vwar wocaw b Example.uwu
-fwile opwen r b a
-fwile nwext a b
-fwile cwose a
-vwar wocaw c Read from file:
-pwint c
-pwint b
-
 (^o^) Array test.
 vwar wocaw n 3
 awway cweate n a
@@ -109,3 +100,11 @@ vwar wocaw fp out.txt
 fwile opwen w fp a
 fwile pwint fp a
 fwile cwose a
+
+vwar wocaw a 2.5
+vwar wocaw b 1.5
+owp pwus b a
+pwint a
+wandom sweed a
+wandom gewt a b
+pwint b
