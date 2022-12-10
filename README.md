@@ -34,6 +34,9 @@ Look at `Examples` directory for examples of all the features and commands.
 - `vwar <subcommand>` Handles variable creation.
   - `gwobaw <var> <value>` Creates global variable `var` and places `value` in it. `value` can contain spaces.
   - `wocaw <var> <value>` Creates a local variable `var` and places `value` in it. This is only effective if you use `subwutine`s.
+- `wandom <subcommand>` Handles random number.
+  - `sweed <seed var>` Sets the seed to number stored in `seed var`.
+  - `gwet <max var> <dest var>` Retrieves a random number between 0 (inclusive) and value stored in `max var` (exclusive) and puts it in `dest var`.
 - `wetwurn` Returns execution to the last place calling `subwutine`.
 - `wumpif <subcommand>` Jumps to other lables on a condition.
   - `eqwal <var a> <var b> <label>` Jumps to `label` if `var a = var b`.
