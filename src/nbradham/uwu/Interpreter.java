@@ -77,11 +77,13 @@ final class Interpreter {
 						break;
 
 					case "gewt":
-						putVar(split[4], ((Object[]) getVar(split[2]))[Integer.parseInt((String) getVar(split[3]))]);
+						putVar(split[4],
+								((Object[]) getVar(split[2]))[(int) Float.parseFloat((String) getVar(split[3]))]);
 						break;
 
 					case "pwut":
-						((Object[]) getVar(split[3]))[Integer.parseInt((String) getVar(split[4]))] = getVar(split[2]);
+						((Object[]) getVar(split[3]))[(int) Float.parseFloat((String) getVar(split[4]))] = getVar(
+								split[2]);
 					}
 					break;
 
@@ -179,7 +181,8 @@ final class Interpreter {
 						RAND.setSeed((long) Float.parseFloat((String) getVar(split[2])));
 						break;
 					case "gewt":
-						putVar(split[3], RAND.nextInt((int) Float.parseFloat((String) getVar(split[2]))));
+						putVar(split[3],
+								Integer.toString(RAND.nextInt((int) Float.parseFloat((String) getVar(split[2])))));
 					}
 					break;
 
