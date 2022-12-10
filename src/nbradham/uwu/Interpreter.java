@@ -126,7 +126,7 @@ final class Interpreter {
 						putVar(split[3], (String) getVar(split[3]) + getVar(split[2]));
 						break;
 
-					case "chrawrAt":
+					case "chawrAt":
 						putVar(split[4],
 								((String) getVar(split[2])).charAt(Integer.parseInt((String) getVar(split[3]))));
 						break;
