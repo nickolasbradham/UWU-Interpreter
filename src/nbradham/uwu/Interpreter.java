@@ -41,7 +41,7 @@ final class Interpreter {
 		int line = -1;
 		while (s.hasNext()) {
 			read = s.nextLine();
-			if (read.startsWith("(^o^)") && !read.isBlank())
+			if (read.startsWith("(^o^)") || read.isBlank())
 				continue;
 
 			if (read.startsWith("!")) {
